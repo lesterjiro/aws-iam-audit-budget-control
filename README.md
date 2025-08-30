@@ -33,6 +33,7 @@ This project provides a **lightweight governance toolkit** with:
 ```
 aws-iam-audit-budget-control/
 │── scripts/       # Python IAM audit script
+│── reports/       # CSV files location
 │── infra/         # Terraform configs
 │── docs/          # Architecture diagram + screenshots
 │── README.md      # Project overview
