@@ -1,44 +1,40 @@
 # AWS IAM Audit + Budget Control
 
-## Problem
+## Why this project
 
-Companies face two big risks in AWS:
+When I was experimenting in AWS, I noticed two recurring problems:
 
-* **IAM sprawl** → inactive users, unused access keys, and over-permissive policies.
-* **Unexpected costs** → sandbox/test projects left running without cost guardrails.
+* Old IAM users and keys that nobody touches anymore.
+* Test resources that keep running and quietly add to the bill.
 
-## Solution
+This project is my attempt to solve both issues in a simple way.
 
-This project provides a **lightweight governance toolkit** with:
+## What it does
 
-* A **Python script** that audits IAM accounts and flags unused credentials.
-* A **Terraform module** that deploys AWS Budgets with automated email alerts.
+* A **Python script** that lists IAM users, their last login, and flags unused keys.
+* A **Terraform module** that sets up AWS Budgets with email alerts (so I get a warning before costs run away).
 
-## Tools Used
+## Tech I used
 
-* **AWS IAM** – User & key management.
-* **AWS Budgets** – Cost monitoring and email alerts.
-* **AWS CLI & boto3** – IAM API scripting.
-* **Terraform** – Infrastructure as Code for budgets + guardrails.
+* **AWS IAM** – user and key data.
+* **AWS Budgets** – to send cost alerts.
+* **boto3 + AWS CLI** – for scripting.
+* **Terraform** – to manage the budget setup as code.
 
-## Features
+## Key features
 
-* Generate CSV report of IAM users + last login date.
-* Detect inactive access keys for cleanup.
-* Automatic budget alerts (e.g., \$5 threshold).
-* Modular Terraform config for easy reuse.
+* Exports a CSV report of IAM users + last login.
+* Identifies inactive access keys.
+* Sends budget alerts (default: \$5).
+* Terraform code is modular so it can be reused.
 
-## Project Structure
+## Project layout
 
 ```
 aws-iam-audit-budget-control/
-│── scripts/       # Python IAM audit script
-│── reports/       # CSV files location
-│── infra/         # Terraform configs
-│── docs/          # Architecture diagram + screenshots
-│── README.md      # Project overview
+│── scripts/    # Python IAM audit script
+│── reports/    # Generated CSV reports
+│── infra/      # Terraform configs for budgets
+│── docs/       # Diagrams and screenshots
+│── README.md   # This file
 ```
-
-## Architecture
-
-![Diagram](docs/diagram-v1.png)
